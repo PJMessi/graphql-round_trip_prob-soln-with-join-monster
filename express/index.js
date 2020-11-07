@@ -1,6 +1,9 @@
 import express from 'express'
 import 'dotenv/config'
 import authMiddleware from './middlewares/auth'
+import { ApolloServer, gql }from 'apollo-server-express';
+import typeDefs from './graphql/typeDefs/index'
+import resolvers from './graphql/resolvers/index'
 
 // initializing express.
 const app = express()
@@ -8,7 +11,12 @@ const app = express()
 // using auth middleware.
 app.use(authMiddleware)
 
-app.use('/', (req, res) => {
+// using graphql middleware
+const server = new ApolloServer({ typeDefs, resolvers });
+server.applyMiddleware({ app });
+
+// routes.
+app.get('/', (req, res) => {
     if (!req.authCheck) {
         throw new Error('unauthenticated.')
     }
@@ -18,5 +26,5 @@ app.use('/', (req, res) => {
 // starting server.
 const port = process.env.APP_PORT || 3000
 app.listen(port, () => {
-    console.log(`Listening on the port ${port}`)
+    console.log(`🚀 Server ready at port ${port}`)
 })
