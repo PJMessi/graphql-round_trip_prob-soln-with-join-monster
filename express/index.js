@@ -5,6 +5,7 @@ import { ApolloServer, gql }from 'apollo-server-express';
 import typeDefs from './graphql/typeDefs/index'
 import resolvers from './graphql/resolvers/index'
 import corsMiddleware from './middlewares/cors'
+import Mongoose from 'mongoose';
 
 // initializing express.
 const app = express()
@@ -23,6 +24,15 @@ app.get('/', (req, res) => {
         throw new Error('unauthenticated.')
     }
     res.send('Express server. Graphql with join monster.')
+})
+
+// connecting to mongodb.
+Mongoose.connect(process.env.MONGO_DB_URL, { useNewUrlParser: true })
+.then(() => {
+    console.log('Connected to Mongodb.')
+})
+.catch(() => {
+    console.error('Could not connect to Mongodb.')
 })
 
 // starting server.
