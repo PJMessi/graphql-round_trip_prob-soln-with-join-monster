@@ -1,4 +1,5 @@
 import userResolvers from './user'
+import authorResolvers from './author'
 
 const books = [
     {
@@ -16,10 +17,12 @@ const books = [
 const resolvers = {
     Mutation: {
         ...userResolvers.mutations,
+        ...authorResolvers.mutations
     },
 
     Query: {
         ...userResolvers.queries,
+        ...authorResolvers.queries,
         books: () => books,
     },
 };

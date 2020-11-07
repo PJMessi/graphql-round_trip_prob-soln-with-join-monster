@@ -13,6 +13,12 @@ const typeDefs = gql`
         email: String!
     }
 
+    type Author {
+        _id: ID!
+        name: String!
+        email: String!
+    }
+
     type LoginData {
         token: String!
         tokenExpiration: String!
@@ -26,13 +32,20 @@ const typeDefs = gql`
         password_confirmation: String!
     }
 
+    input AuthorInput {
+        name: String!
+        email: String!
+    }
+
     type Query {
         books: [Book]
         loginUser(email: String!, password: String!): LoginData!
+        getAuthors: [Author]
     }
 
     type Mutation {
         addUser(userInput: UserInput): User!
+        addAuthor(authorInput: AuthorInput): Author!
     }
 `;
 
