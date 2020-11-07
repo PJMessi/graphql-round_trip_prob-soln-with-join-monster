@@ -1,3 +1,5 @@
+import userResolvers from './user'
+
 const books = [
     {
         _id: 1,
@@ -12,7 +14,12 @@ const books = [
 ];
 
 const resolvers = {
+    Mutation: {
+        ...userResolvers.mutations,
+    },
+
     Query: {
+        ...userResolvers.queries,
         books: () => books,
     },
 };
