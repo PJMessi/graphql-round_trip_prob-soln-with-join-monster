@@ -29,4 +29,4 @@ const handle = (req, res, next) => {
     }
 }
 
-module.exports = handle
+export default handle
