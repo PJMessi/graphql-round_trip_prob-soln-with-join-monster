@@ -1,29 +1,18 @@
 import userResolvers from './user'
 import authorResolvers from './author'
-
-const books = [
-    {
-        _id: 1,
-        title: 'The Awakening',
-        description: 'Kate Chopin',
-    },
-    {
-        _id: 2,
-        title: 'City of Glass',
-        description: 'Paul Auster',
-    },
-];
+import bookResolvers from './book'
 
 const resolvers = {
     Mutation: {
         ...userResolvers.mutations,
-        ...authorResolvers.mutations
+        ...authorResolvers.mutations,
+        ...bookResolvers.mutations
     },
 
     Query: {
         ...userResolvers.queries,
         ...authorResolvers.queries,
-        books: () => books,
+        ...bookResolvers.queries
     },
 };
 
