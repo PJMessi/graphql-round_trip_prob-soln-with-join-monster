@@ -4,11 +4,13 @@ import authMiddleware from './middlewares/auth'
 import { ApolloServer, gql }from 'apollo-server-express';
 import typeDefs from './graphql/typeDefs/index'
 import resolvers from './graphql/resolvers/index'
+import corsMiddleware from './middlewares/cors'
 
 // initializing express.
 const app = express()
 
-// using auth middleware.
+// using middlewared.
+app.use(corsMiddleware)
 app.use(authMiddleware)
 
 // using graphql middleware

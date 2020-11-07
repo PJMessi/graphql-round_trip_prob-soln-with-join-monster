@@ -1,4 +1,4 @@
-const handle = app.use((req, res, next) => {
+const handle = (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
@@ -8,6 +8,6 @@ const handle = app.use((req, res, next) => {
     }
 
     next();
-});
+}
 
 export default handle
